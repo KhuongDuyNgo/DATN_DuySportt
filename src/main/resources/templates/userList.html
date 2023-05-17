@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org./1999/xhtml" xmlns:sec="http://www.w3.org./1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<body>
+
+<div th:replace="adminHome :: navbarAdmin"> </div>
+
+<div class="container page-content">
+  <table id="table-user" class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>Username</th>
+      <th>Họ tên</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="u : ${userRoleList}">
+      <td th:text="${u.user.username}"></td>
+      <td th:text="${u.user.firstName}"></td>
+      <td th:text="${u.user.email}"></td>
+      <td th:text="${u.role.name}"></td>
+
+      <td><a th:href="@{/user/edit?id=}+${u.user.id}" class="badge badge-primary">Xem</a>
+        <a th:href="@{/user/delete?id=}+${u.userRoleId}" class="badge badge-danger">Xóa </a> </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div th:replace="common/header :: body-scripts"> </div>
+
+<script>
+  $(document).ready(function() {
+    $('#table-user').DataTable({
+      stateSave: true
+    });
+  } );
+</script>
+
+</body>
+</html>
